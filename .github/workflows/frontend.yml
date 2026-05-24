@@ -21,6 +21,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Run Security Scan
+        run: npm audit --audit-level=high
+
       - name: Build React App
         run: npm run build
 
@@ -33,3 +36,9 @@ jobs:
 
       - name: Deploy to S3
         run: aws s3 sync dist/ s3://fatima-starttech-frontend-2026-001 --delete
+
+      - name: Invalidate CloudFront Cache
+       run: aws cloudfront create-invalidation --distribution-id E3DK1H8M3ZFCX8 --paths "/*"
+
+      - name: Deployment Success
+        run: echo "Frontend deployed successfully!"
