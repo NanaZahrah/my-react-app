@@ -1,16 +1,27 @@
-# React + Vite
+# Much-To-Do Application (My-react-app)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend and backend components for the Much-To-Do application.
 
-Currently, two official plugins are available:
+## Project Structure
+- `frontend/`: React application built with Vite.
+- `backend/`: Golang API service with Docker support.
+- `.github/workflows/`: CI/CD pipelines for automated testing and deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## CI/CD Pipeline
+This project uses GitHub Actions for CI/CD:
+- **Frontend CI/CD**: Automatically builds the React app and deploys to AWS S3.
+- **Backend CI/CD**: Builds the Docker image and deploys to AWS EC2.
 
-## React Compiler
+## Deployment Instructions
+### Frontend
+1. Navigate to `/frontend`
+2. Run `npm install`
+3. Run `npm run build`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Backend
+1. Navigate to `/backend`
+2. Run `go build -o main .`
+3. To build the container: `docker build -t much-to-do-backend .`
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Architecture
+This application follows a decoupled architecture, with the frontend served via S3/CloudFront and the backend running as a containerized service on EC2.
